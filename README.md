@@ -29,6 +29,8 @@ composer install
 
 Disponibilizamos um arquivo chamado `.env.example` que contém todas as variáveis de ambiente necessárias para o funcionamento da aplicação.
 
+É importante notar que o `DB_HOST` está `mysql` devido ao container mysql que é criado no arquivo `docker-compose.yml`, portanto, caso você queira executar a aplicação de maneira local, é necessário mudar o valor da variável para sua instância do banco `mysql`.
+
 É necessário que você copie o conteúdo do arquivo `.env.example` para um arquivo chamado `.env` e mude as variáveis de acordo com sua necessidade.
 
 Se atente às variáveis de conexão com o banco de dados, pois elas precisam ser direcionadas à sua própria instância de [MySQL](https://www.mysql.com/).
@@ -73,6 +75,12 @@ Após o término do processo, instale as dependências do `composer` dentro do c
 docker exec app composer install
 ```
 
+Gere uma chave para a sua aplicação:
+
+```
+docker exec app php artisan key:generate
+```
+
 E por fim, execute as migrations do banco de dados:
 
 ```
@@ -84,3 +92,5 @@ No término desse processo, teremos três containers criados:
 - **nginx**: Servidor HTTP responsável por hospedar e redirecionar para nossa aplicação.
 - **mysql**: Um banco de dados responsável por armazenar os contatos do
 - **app**: A aplicação Laravel.
+
+Você consegue acessar o servidor nginx através do endereço: `http://localhost:8000`
